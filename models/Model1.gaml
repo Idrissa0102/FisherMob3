@@ -5,12 +5,17 @@
 * Tags: Définition de l'environnement
 */
 
-
 model Model1
+
+import "Mobility.gaml"
 
 /* Insert your model definition here */
 
 global {
+	
+	
+	int nb_unitePeche;
+	
 	
 	//Définition des fichiers shapefiles d'environnement
 	file shapefile_coastline <- file("../includes/shapefile/world-coastline-110-million.shp");
@@ -41,6 +46,14 @@ global {
 		
 		//Création de l'élèment zone de pêche
 		create zonePeche from: shapefile_zonePeche with: [name:: read('nom')];
+		
+		//Création de l'élèment unité de pêche
+		create unitePeche number: 10 {
+			start_work <- rnd(min_work_start, max_work_start);
+			end_work <- rnd (min_work_end, max_work_end);
+			objective <- "resting";
+			location <- any_location_in(one_of(petiteCoteQuai));
+		}
 	}
 }
 
@@ -80,11 +93,12 @@ species zonePeche {
 
 experiment main type: gui {
 	output {
-		display carte_principael background: rgb(224,255,255){
+		display carte_principale background: rgb(224,255,255){
 			species region;
 			species coastline;
 			species quai;
 			species zonePeche;
+			species unitePeche;
 		}
 	}
 }
