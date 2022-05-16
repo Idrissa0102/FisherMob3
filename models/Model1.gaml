@@ -13,9 +13,8 @@ import "Mobility.gaml"
 
 global {
 	
-	
-	int nb_unitePeche;
-	
+	//Définition des variables
+	int nb_unitePeche <- 10;	
 	
 	//Définition des fichiers shapefiles d'environnement
 	file shapefile_coastline <- file("../includes/shapefile/world-coastline-110-million.shp");
@@ -48,7 +47,7 @@ global {
 		create zonePeche from: shapefile_zonePeche with: [name:: read('nom')];
 		
 		//Création de l'élèment unité de pêche
-		create unitePeche number: 10 {
+		create unitePeche number: nb_unitePeche {
 			start_work <- rnd(min_work_start, max_work_start);
 			end_work <- rnd (min_work_end, max_work_end);
 			objective <- "resting";

@@ -13,7 +13,8 @@ model Mobility
 species unitePeche skills: [moving] {
 	
 	//Définition des variables 
-	float step <- 10 #mn;
+	//float step <- 10 #mn
+	int nb_unitePeche <- 10;
 	date starting <- date("2022-01-01-00-00-00");
 	int start_work;
 	int end_work;
