@@ -9,13 +9,14 @@ model Model1
 
 import "Mobility.gaml"
 import "Carte.gaml"
+import "Biomasse.gaml"
 
 /* Insert your model definition here */
 
 global {
 	
 	//Définition des variables
-	int nb_unitePeche <- 10;	
+	int nb_unitePeche <- 10;
 	
 	//Initialisation
 	init {

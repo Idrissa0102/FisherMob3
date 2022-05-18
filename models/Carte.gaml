@@ -13,7 +13,7 @@ model Carte
 global {
 	
 	//Définition des fichiers CSV contenant les coordonnées géographiques des quais et des zones de pêche
-	//file data_csv_file <- csv_file("../includes/gis/data.csv", ",", float);
+	file data_csv_file <- csv_file("../includes/gis/data.csv", ",", float);
 	
 	//Définition des fichiers shapefiles d'environnement
 	file shapefile_coastline <- file("../includes/shapefile/world-coastline-110-million.shp");
@@ -39,10 +39,15 @@ global {
 		create coastline from: shapefile_coastline;
 		
 		//création de l'élèment quai de pêche ou encore site de débarquement
-		create quai from: shapefile_quai with: [name:: read('Nom')];
+		create quai from: shapefile_quai with: [name:: read('Nom')]{
+			matrix<float> data <- matrix(data_csv_file);
+			loop i from: 0 to: data.rows - 1 {
+				point poi_location_WGS84 <- {data[0,i], data[1,i]};
+				point poi_location_GAMA <- point(to_GAMA_CRS(poi_location_WGS84, "EPSG:4326"));				
+			} 
+		}
+				
 		
-		//Création de l'élèment zone de pêche
-		create zonePeche from: shapefile_zonePeche with: [name:: read('nom')];
 	}
 }
 
@@ -69,13 +74,5 @@ species quai {
 	aspect default {
 		draw anchor size:10000;
 		draw name size: 10 color: #black;
-	}
-}
-
-//**Zone de pêche**
-species zonePeche {
-	aspect default {
-		draw circle(5000) color: #cyan;
-		draw name size:10 color: #black;
 	}
 }
