@@ -8,11 +8,12 @@
 
 model Biomasse
 
+import "Initialisation.gaml"
+import "Mobility.gaml"
+
 /* Insert your model definition here */
 
 global {
-	//Définition  des variables
-	int biomasseInitiale <- 50000;
 	
 	//Définition des fichiers CSV contenant les coordonnées géographiques des zones de pêche
 	file data_csv_file <- csv_file("../includes/gis/data.csv", ",", float);
@@ -37,6 +38,11 @@ species zonePeche {
 	
 	reflex when: biomasseInitiale > 0 {
 		ask zonePeche {
+			ask unitePeche overlapping(self) {
+				biomasseInitiale <- biomasseInitiale - biomasseAcapture;
+				bioCapture <- bioCapture + biomasseAcapture;
+				self.dejaPeche <- false;
+			}
 		}
 	} 
 }

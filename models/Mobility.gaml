@@ -8,6 +8,8 @@
 
 model Mobility
 
+import "Initialisation.gaml"
+
 /* Insert your model definition here */
 
 species unitePeche skills: [moving] {
