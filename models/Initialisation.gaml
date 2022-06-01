@@ -20,6 +20,13 @@ global {
 	int biomasseAcapture <- 50;
 	int bioCapture;
 	
+
+	//Heures de pêches : 
+
+
+
+//heure_depart_peche_ligne = 6
+//heure_retour_peche_ligne = 18
 	
 }
 

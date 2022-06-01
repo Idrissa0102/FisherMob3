@@ -16,9 +16,12 @@ species unitePeche skills: [moving] {
 	
 	//Définition des variables 
 	//float step <- 10 #s;
-	int nb_unitePeche <- 10;
 	date starting <- date("2022-01-01-00-00-00");
-	int start_work;
+//mettre date dans  initialisation	
+
+
+
+int start_work;
 	int end_work;
 	int min_work_start <- 6;
 	int max_work_start <- 8;
